@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+</head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="KobisOpenAPIRestService.js"></script>
+<script>
+function movie() {
+	var query;
+	var key = "6e05d21ca6087df839db317c3579599c";
+/*    $.get(
+    	"https://www.googleapis.com/youtube/v3/videos", {
+            part: 'statistics',
+            id:id,
+            key: gapikey
+            	
+        }, function(data) {
+            query = data;
+        });*/
+
+	$.ajax({
+        type: 'GET',
+        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='+key+'&targetDt=20120101',
+        async: false,
+        success: function(data) {
+        	 if(data != null) {
+        		 console.log(data);
+             }
+        	 query = data;
+        }
+   });
+   
+    return query;
+}
+
+$(document).ready(function(){
+
+	var str = movie();
+	var str1 = str.boxOfficeResult.boxofficeType;
+	var date = str.boxOfficeResult.showRange;
+	var str1_count = str.boxOfficeResult.boxofficeType.length;
+	
+	document.getElementById("demo").innerHTML = date+" - "+str1;
+	document.getElementById("demo1").innerHTML = str.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
+	
+	for(var i = 0; i<str1_count; i++){
+		$("#demo1").append("");
+	}
+});
+
+</script>
+<body>
+hellow world
+<p id="demo"></p>
+<div id="demo1"></div>
+
+</body>
+</html>
