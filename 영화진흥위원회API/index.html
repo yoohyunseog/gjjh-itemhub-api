@@ -42,19 +42,25 @@ $(document).ready(function(){
 	var date = str.boxOfficeResult.showRange;
 	var str1_count = str.boxOfficeResult.boxofficeType.length;
 	
-	document.getElementById("demo").innerHTML = date+" - "+str1;
-	document.getElementById("demo1").innerHTML = str.boxOfficeResult.dailyBoxOfficeList[0].movieNm;
-	
+/* 	document.getElementById("demo").innerHTML = date+" - "+str1;
+	document.getElementById("demo1").innerHTML = str.boxOfficeResult.dailyBoxOfficeList[0].movieNm; */
+	$("#table_1").append("<tr><th>"+date+"</th><th>"+str1+"</th></tr>");
 	for(var i = 0; i<str1_count; i++){
-		$("#demo1").append("");
+		$("#table_1").append("<tr><td>"+(i+1)+"</td><td><hd>"+str.boxOfficeResult.dailyBoxOfficeList[i].movieNm+"</hd></td></tr>");
 	}
 });
 
 </script>
 <body>
+<style>
+#table_1, th, td{
+border:1px solid black;
+text-align: center;
+}
+</style>
 hellow world
 <p id="demo"></p>
-<div id="demo1"></div>
+<div id="demo1"><table id="table_1" style="border:1px solid black;"></table></div>
 
 </body>
 </html>
