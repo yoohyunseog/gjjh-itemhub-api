@@ -22,7 +22,7 @@ function movie() {
 
 	$.ajax({
         type: 'GET',
-        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='+key+'&targetDt=20120101',
+        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='+key+'&targetDt=20170312',
         async: false,
         success: function(data) {
         	 if(data != null) {
@@ -41,7 +41,6 @@ $(document).ready(function(){
 	var str1 = str.boxOfficeResult.boxofficeType;
 	var date = str.boxOfficeResult.showRange;
 	var str1_count = str.boxOfficeResult.boxofficeType.length;
-	
 /* 	document.getElementById("demo").innerHTML = date+" - "+str1;
 	document.getElementById("demo1").innerHTML = str.boxOfficeResult.dailyBoxOfficeList[0].movieNm; */
 	$("#table_1").append("<tr><th>"+date+"</th><th>"+str1+"</th></tr>");
