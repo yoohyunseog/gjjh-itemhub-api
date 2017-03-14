@@ -9,46 +9,35 @@
 
     <script type="text/javascript">
 
-      function makeRequest(q) {
-        var request = gapi.client.youtube.search.list({
-          q: q,
-          part: 'snippet',
-          maxResults: 3
+      function makeRequest() {
+        var request = gapi.client.youtube.videos.list({
+          id: 'zp5MSITkkiM',
+          part: 'id,statistics',
         });
-
         request.execute(function(response) {
-          $('#results').empty();
-          var resultItems = response.result.items;
-          $.each(resultItems, function(index, item) {
-            vidTitle = item.snippet.title;
-            vidThumburl =  item.snippet.thumbnails.default.url;
-            vidThumbimg = '<pre><img id="thumb" src="'+vidThumburl+'" alt="No  Image Available." style="width:204px;height:128px"></pre>';
-            $('#results').append('<pre>' + vidTitle + vidThumbimg +  '</pre>');
-          });
+        	var resultItems = response.result.items;
+        	$.each(resultItems, function(index, item) {
+        	var viewCount = item.statistics.viewCount;
+              });
         });
       }
 
       function init() {
         gapi.client.setApiKey('AIzaSyClUC-kVxJtYDxjraNMHEOebqn032h_-1M');
-        gapi.client.load('youtube', 'v3', function() {
-          data = jQuery.parseJSON( '{ "data": [{"name":"taylor swift"}] }' );
-          $.each(data["data"], function(index, value) {
-            makeRequest(value["name"]);
-          });
-        });
+        gapi.client.load('youtube', 'v3');
       }
-
+      
     </script>
 
     <script type="text/javascript" src="https://apis.google.com/js/client.js?onload=init"></script>
-
+	
   </head>
 
   <body>
 
     <h1>YouTube API 3.0 Test</h1>
     <ul id="results"></ul>
-
+	<button style="width:200px; height:100px; border:1px solid #ccc;" onclick="makeRequest()"></button>
   </body>
 
 </html>

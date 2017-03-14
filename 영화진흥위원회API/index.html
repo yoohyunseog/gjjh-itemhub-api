@@ -19,10 +19,13 @@ function movie() {
         }, function(data) {
             query = data;
         });*/
-
+        var ftoday = new Date()
+        var ftodaymonth = ftoday.getMonth()+1;
+        ftodaymonth = ftodaymonth < 10 ? "0" + ftodaymonth: ftodaymonth;
+        ftoday = ftoday.getFullYear()+""+ftodaymonth+""+(ftoday.getDate()-1);
 	$.ajax({
         type: 'GET',
-        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='+key+'&targetDt=20170312',
+        url: 'http://www.kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchDailyBoxOfficeList.json?key='+key+'&targetDt='+ftoday,
         async: false,
         success: function(data) {
         	 if(data != null) {
